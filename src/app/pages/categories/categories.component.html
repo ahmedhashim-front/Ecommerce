@@ -1,0 +1,37 @@
+<section>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+    @for (cat of categories(); track $index) {
+    <div
+      (click)="getSubCat(cat._id, cat.name)"
+      class="bg-white shadow-lg p-4 flex flex-col items-center transform transition duration-300 hover:scale-105 hover:shadow-xl hover:shadow-green-500"
+    >
+      <img
+        [src]="cat.image"
+        [alt]="cat.name"
+        class="w-full h-[300px] object-contain mb-3"
+      />
+      <h3 class="text-lg text-green-600 font-semibold">{{ cat.name }}</h3>
+    </div>
+
+    }
+  </div>
+  @if(SubCategories()){
+  <div class="text-center text-5xl">
+    <h3 class="text-2xl text-green-400 font-semibold p-3">
+      {{ nameCat()   }} 
+    </h3>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+    @for (item of SubCategories(); track $index) {
+    <div
+      class="bg-white shadow-lg p-4 flex flex-col items-center transform transition duration-300 hover:scale-105 hover:shadow-xl hover:shadow-green-500"
+    >
+      <h3 class="text-lg font-semibold">{{ item.name }}</h3>
+    </div>
+
+    }
+  </div>
+
+  }
+</section>

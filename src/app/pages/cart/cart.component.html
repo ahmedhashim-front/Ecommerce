@@ -1,0 +1,49 @@
+<section class="m-sec-style w-[75%] mx-auto">
+  <h1 class="text-green-800 text-center text-4xl">Shop Cart</h1>
+  <div class="flex justify-between items-center">
+    
+    <h3 class="text-green-600">
+      Total Cart Price: {{ cartDetails.totalCartPrice | currency : "GBP" }}
+    </h3>
+    <button (click)="clearAllCart()" class="ms-auto bg-red-700 text-white px-10 py-2 border rounded">
+      Clear Cart
+    </button>
+  </div>
+
+  @for (prod of cartDetails.products; track prod.product.id) {
+  <div class="main-div grid md:grid-cols-[10%_minmax(0,1fr)] gap-4 border-b">
+    <!-- img -->
+    <div>
+      <img
+        [src]="prod.product.imageCover"
+        class="w-full h-[100px] object-contain"
+        [alt]="prod.product.title"
+      />
+    </div>
+    <div class="flex justify-between items-center">
+      <div>
+        <h3>{{ prod.product.title }}</h3>
+        <h4 class="text-green-500">
+          Price: {{ prod.price | currency : "GBP" }}
+        </h4>
+        <button (click)="removeItem(prod.product.id)">
+          <i class="text-red-600 fa fa-trash-can"></i> Remove
+        </button>
+      </div>
+      <div class="flex items-center gap-4">
+        <button (click)="upDateItem(prod.product.id, prod.count + 1)">
+          <i class="text-2xl text-green-600 fa-regular fa-square-plus"></i>
+        </button>
+        <span> {{ prod.count }} </span>
+        <button (click)="upDateItem(prod.product.id, prod.count - 1)">
+          <i class="text-2xl text-green-600 fa-regular fa-square-minus"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- info -->
+  </div>
+  }
+  <div class="text-center"></div>
+  <button [routerLink]="['/checkout',cartDetails._id]" class="btn-main mt-7">Payment</button>
+</section>

@@ -1,0 +1,63 @@
+<section>
+  <h2 class="text-4xl py-4">Products</h2>
+  <div class="grid place-items-center my-12">
+    <input
+      type="search"
+      name="search"
+      placeholder="Search by name...."
+      class="w-[50%] mx-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      id="search"
+      [(ngModel)]="text"
+    />
+  </div>
+
+  <div
+    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-10"
+  >
+    @for (product of products() |search:text ; track product.id) {
+    <div
+      class="card border border-green-400/50 rounded-md overflow-hidden shadow relative"
+    >
+      <div>
+        <div class="card-img" [routerLink]="['/details', product.id]">
+          <img
+            [src]="product.imageCover"
+            alt=""
+            class="w-full h-[250px] object-contain"
+          />
+        </div>
+        <div class="card-body px-2 py-4">
+          <h4 class="text-green-500 text-xl">
+            {{ product.category.name | sale | uppercase }}
+          </h4>
+          <h3 class="font-medium">
+            Title: {{ product.title.split(" ", 2).join(" ") }}
+          </h3>
+          <div class="flex justify-between items-center">
+            <span> {{ product.price | currency }} </span>
+            <div class="flex items-center">
+              <i class="fas fa-star text-yellow-400"></i>
+              <span class="text-gray-500"> {{ product.ratingsAverage }} </span>
+              <i
+                (click)="addWishListItem(product.id)"
+                [class]="
+                  isFavorite(product.id)
+                    ? 'text-red-500 text-5xl fa-solid fa-heart'
+                    : 'text-green-500 text-5xl fa-solid fa-heart'
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button
+        (click)="addCartItem(product.id)"
+        class="bg-green-600 text-white py-2 px-10 border rounded w-[90%] mx-auto block"
+      >
+        Add to Cart
+      </button>
+    </div>
+    }
+  </div>
+</section>

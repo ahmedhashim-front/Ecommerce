@@ -1,0 +1,50 @@
+@if (show) {
+<section
+  (click)="hideSection()"
+  [class]="
+    show
+      ? ' opacity-100 z-10'
+      : '-translate-y-full opacity-0 pointer-events-none fixed w-[50%] z-10'
+  "
+  (click)="hideSection()"
+>
+  <div class="bg-white w-[50%] py-2 px-4 mx-auto border-2 ">
+    <div class="border-b-2 border-gray-200">
+      <i (click)="isShow()" class="ms-[97%] fa-solid fa-xmark text-2xl"></i>
+    </div>
+    <div class="my-7">
+      <h1 class="text-green-700 text-5xl">{{ spacifibrandData.name }}</h1>
+      <h2 class="ms-[50%] pr-4">{{ spacifibrandData.slug }}</h2>
+      <p class="text-neutral-400">
+        {{ spacifibrandData.name }}
+      </p>
+    </div>
+    <div class="border-t-2 border-gray-200 my-4">
+      <button (click)="isShow()" class="my-2 btn-main ms-[50%]">Close</button>
+    </div>
+  </div>
+</section>
+
+}
+
+<section  [class]="show ? 'opacity-50' : 'opacity-100'">
+ 
+  <div
+ 
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6"
+  >
+
+    @for (item of brandData; track item._id ) {
+
+    <div
+   
+      (click)="showDeatils(item._id)"
+      class="bg-white text-center p-6 rounded-2xl shadow-lg transition-shadow duration-300 hover:shadow-2xl hover:shadow-green-400"
+    >
+      <img [src]="item.image" alt="" />
+      <p class="text-xl font-semibold mb-3">{{ item.name }}</p>
+    </div>
+
+    }
+  </div>
+</section>

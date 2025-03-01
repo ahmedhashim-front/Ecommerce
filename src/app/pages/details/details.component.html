@@ -1,0 +1,37 @@
+@if (detailsProduct) {
+<section>
+  <div class="grid md:grid-cols-[30%_minmax(0,1fr)] text-lg items-center">
+    <div>
+      <img
+        [src]="detailsProduct.imageCover"
+        [alt]="detailsProduct.title"
+        class="w-full border border-black"
+      />
+    </div>
+
+    <div class="ms-4">
+      <h2>{{ detailsProduct.title }}</h2>
+      <p class="text-gray-500 text-opacity-50">
+        {{ detailsProduct.description }}
+      </p>
+      <h3>{{ detailsProduct.category.name }}</h3>
+
+      <div class="flex justify-between items-center">
+        <span> {{ detailsProduct.price }} EGP</span>
+        <div class="flex items-center">
+          <i class="fas fa-star text-yellow-400"></i>
+          <span class="text-gray-500">
+            {{ detailsProduct.ratingsAverage }}
+          </span>
+        </div>
+      </div>
+      <button
+        (click)="addCartItem(detailsProduct.id)"
+        class="bg-green-600 text-white py-3 px-11 border rounded w-[100%] mx-auto block"
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</section>
+}

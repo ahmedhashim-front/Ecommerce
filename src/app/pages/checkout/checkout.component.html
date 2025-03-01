@@ -1,0 +1,100 @@
+<section class="m-sec-style w-[50%] mx-auto">
+  <h1 class="text-green-600 text-center text-2xl">CheckOut</h1>
+
+  <form [formGroup]="checkOutForm">
+    <div class="mb-1">
+      <label
+        for="details"
+        class="block mb-2 ms-2 text-sm font-medium text-black"
+        >details</label
+      >
+      <textarea
+        formControlName="details"
+        id="details"
+        class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      ></textarea>
+      @if (checkOutForm.get('details')?.errors&&
+      checkOutForm.get('details')?.touched) {
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if (checkOutForm.get('details')?.getError('required')) {
+            <li>This field is required.</li>
+
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="mb-1">
+      @let phoneControl = checkOutForm.get('phone');
+      <label for="phone" class="block mb-2 ms-2 text-sm font-medium text-black"
+        >phone</label
+      >
+      <input
+        formControlName="phone"
+        type="tel"
+        id="phone"
+        class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+      @if (phoneControl?.errors&&phoneControl?.touched) {
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if (phoneControl?.getError('required')) {
+            <li>This field is required.</li>
+
+            } @else if (phoneControl?.getError('pattern')) {
+            <li>Enter Valid phone</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="mb-1">
+      <label for="city" class="block mb-2 ms-2 text-sm font-medium text-black"
+        >city</label
+      >
+      <input
+        formControlName="city"
+        type="text"
+        id="city"
+        class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <button class="btn-main" (click)="submitForm()">Onlin Payment</button>
+  </form>
+</section>
